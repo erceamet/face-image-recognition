@@ -56,6 +56,7 @@ class App extends Component {
     const clarifaiFaces = data.outputs[0].data.regions.map(
       (region) => region.region_info.bounding_box
     );
+    if (clarifaiFaces === "undefined") return 0;
     const image = document.getElementById("inputimage");
     const width = Number(image.width);
     const height = Number(image.height);
