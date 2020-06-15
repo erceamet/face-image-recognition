@@ -1,10 +1,14 @@
 {
   "name": "face-image-recognition-api",
   "version": "1.0.0",
+  "engines": {
+    "node": "13.x"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "start:dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",

@@ -12,14 +12,13 @@ const register = require("./controllers/register");
 const signin = require("./controllers/signin");
 const profile = require("./controllers/profile");
 const image = require("./controllers/image");
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 const db = knex({
   client: "pg",
   connection: {
-    host: "127.0.0.1",
-    user: "postgres",
-    password: "P0stgr3.98",
-    database: "face-image-recognition",
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
   },
 });
 
@@ -27,7 +26,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send(database.users);
+  res.send("it is working");
 });
 
 app.post("/signin", (req, res) => {
@@ -50,6 +49,6 @@ app.post("/imageurl", (req, res) => {
   image.handleApiCall(req, res);
 });
 
-app.listen(3000, () => {
-  console.log("app is running on port 3000");
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`app is running on port ${process.env.PORT}`);
 });
