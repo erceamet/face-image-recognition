@@ -53,15 +53,12 @@ class App extends Component {
   };
 
   calculateFaceLocation = (data) => {
-    const clarifaiFaces = data.outputs[0].data.regions.map(
-      (region) => region.region_info.bounding_box
-    );
-    if (clarifaiFaces === "undefined") return 0;
+    const clarifaiFaces = data.outputs[0].data.regions;
     const image = document.getElementById("inputimage");
     const width = Number(image.width);
     const height = Number(image.height);
 
-    return clarifaiFaces.map((face) => {
+    const allBoxes = clarifaiFaces.map((face) => {
       return {
         leftCol: face.left_col * width,
         topRow: face.top_row * height,
@@ -69,6 +66,7 @@ class App extends Component {
         bottomRow: height - face.bottom_row * height,
       };
     });
+    return allBoxes;
   };
 
   displayFaceBox = (boxes) => {
